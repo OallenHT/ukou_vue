@@ -1,9 +1,13 @@
 import Vue from 'vue'
+import './plugins/axios'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import './plugins/element.js'
+import captcha from 'vue-social-captcha'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+Vue.use(captcha);
 
 new Vue({
   router,
