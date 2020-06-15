@@ -72,6 +72,13 @@
     export default {
         name: "Login",
 
+        created() {
+            axios.defaults.withCredentials = true;
+            axios.get("http://localhost:8088/user/getSession").then(res => {
+                this.loginSession = res.data;
+            });
+        },
+
         mounted() {
             this.getCookie();
         },
@@ -144,6 +151,7 @@
             return {
                 labelPosition: 'right',
                 checked: true,
+                loginSession: null,
                 loginForm: {
                     email: '',
                     password: ''
@@ -202,10 +210,7 @@
 
                             console.log('res=>',res);
                             if (res.data) {
-                                this.$message({
-                                    message: '登录成功！',
-                                    type: 'success'
-                                });
+                                self.$message.success('登录成功！');
 
                                 if (self.checked == true) {
                                     // console.log("checked == true");
